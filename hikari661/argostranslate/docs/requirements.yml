@@ -1,0 +1,5 @@
+---
+collections:
+  - name: hikari661.argostranslate
+    source: https://galaxy.ansible.com
+

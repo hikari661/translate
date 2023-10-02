@@ -44,25 +44,21 @@ options:
             - 'ga' = Gaelic
         required: true
         type: string
-# Specify this value according to your collection
-# in format of namespace.collection.doc_fragment_name
-# extends_documentation_fragment:
-#     - my_namespace.my_collection.my_doc_fragment_name
 
 author:
-    - Jonathan Bishop (@jonno888)
+    - Jonathan Bishop (@hikari661)
 '''
 
 EXAMPLES = r'''
-# Pass in a message
+# Pass in some text to translate
 - name: Translate from English to Japanese
-  jonno888.argostranslate.translate:
+  hikari661.argostranslate.translate:
     text: 'My dog is very muddy.'
     source: 'en'
     target: 'ja'
 
 # fail the module
-jonno888.argostranslate.translate:
+hikari661.argostranslate.translate:
     text: 'fail me'
     source: 'en'
     target: 'ja'
@@ -70,20 +66,19 @@ jonno888.argostranslate.translate:
 
 RETURN = r'''
 # These are examples of possible return values, and in general should use other names for return values.
-original_message:
-    description: The original name param that was passed in.
+original_text:
+    description: The text that was provided for translation.
     type: str
     returned: always
-    sample: 'hello world'
-message:
-    description: The output message that the test module generates.
+    sample: 'My dog is very muddy'
+translated_text:
+    description: The translated text.
     type: str
     returned: always
-    sample: 'goodbye'
+    sample: '私の犬は非常に泥だめです'
 '''
 
 from ansible.module_utils.basic import AnsibleModule
-
 
 def run_module():
     # define available arguments/parameters a user can pass to the module
@@ -91,7 +86,8 @@ def run_module():
         source=dict(type='str', required=True),
         target=dict(type='str', required=True),
         text=dict(type='str', required=True)
-        )
+    )
+
     # seed the result dict in the object
     # we primarily care about changed and state
     # changed is if this module effectively modified the target
@@ -99,8 +95,8 @@ def run_module():
     # for consumption, for example, in a subsequent task
     result = dict(
         changed=False,
-        original_message='',
-        message=''
+        original_text='',
+        translated_text=''
     )
 
     # the AnsibleModule object will be our abstraction working with Ansible
@@ -122,8 +118,8 @@ def run_module():
     # part where your module will do what it needs to do)
     # r = requests.post(module.params['server']"/translate", data={'q': module.params['text'], 'source': module.params['source'], 'target': module.params['target']})
     translatedText = argostranslate.translate.translate(module.params['text'], module.params['source'], module.params['target'])
-    result['message'] = translatedText
-    result['original_message'] = module.params['text']
+    result['translated_text'] = translatedText
+    result['original_text'] = module.params['text']
     # use whatever logic you need to determine whether or not this module
     # made any modifications to your target
     if module.params['text']:
