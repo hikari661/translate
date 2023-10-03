@@ -1,10 +1,13 @@
 name: Build
 on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - run: |
+            VERSION=`grep "version: " galaxy.yml | awk {'print $2'}`
+            ansible-galaxy collection build
+            ansible-galaxy collection publish -s https://galaxy.ansible.com/api --token ${{ secrets.GALAXY }} hikari661-argostranslate-$VERSION.tar.gz
+        if: github.event_name == 'push'
+        working-directory: hikari661/translate
 
-steps:
-- run: |
-    VERSION=`grep "version: " galaxy.yml | awk {'print $2'}`
-    ansible-galaxy collection build
-    ansible-galaxy collection publish -s https://galaxy.ansible.com/api --token ${{ secrets.GALAXY }} hikari661-argostranslate-$VERSION.tar.gz
-  if: github.event_name == 'push'
-- working-directory: hikari661/translate
