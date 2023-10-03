@@ -10,5 +10,5 @@ jobs:
           VERSION=`grep "version: " galaxy.yml | awk {'print $2'}`
           ansible-galaxy collection build
           ansible-galaxy collection publish -s https://galaxy.ansible.com/api --token ${{ secrets.GALAXY }} hikari661-argostranslate-$VERSION.tar.gz
-          working-directory: hikari661/argostranslate
+        working-directory: hikari661/argostranslate
 
