@@ -7,8 +7,8 @@ jobs:
       - name: Build collection and deploy to Galaxy
         run: |
           ansible-galaxy --help
-          #VERSION=`grep "version: " galaxy.yml | awk {'print $2'}`
-          #ansible-galaxy collection build
-          #ansible-galaxy collection publish -s https://galaxy.ansible.com/api --token ${{ secrets.GALAXY }} hikari661-argostranslate-$VERSION.tar.gz
-        #working-directory: hikari661/translate
+          VERSION=`grep "version: " galaxy.yml | awk {'print $2'}`
+          ansible-galaxy collection build
+          ansible-galaxy collection publish -s https://galaxy.ansible.com/api --token ${{ secrets.GALAXY }} hikari661-argostranslate-$VERSION.tar.gz
+          working-directory: hikari661/argostranslate
 
