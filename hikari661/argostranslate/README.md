@@ -9,7 +9,7 @@ For the translate module to work, you must have argos-translate installed in you
 ```
 pip install argostranslate # Install the argos-translate engine
 argospm install translate  # Install all the language models.
-argosmp install translate-en_ja # Save space by only installing the language model you need
+argospm install translate-en_ja # Save space by only installing the language model you need
 ```
 
 See https://github.com/argosopentech/argos-translate/ for other installation options.   
