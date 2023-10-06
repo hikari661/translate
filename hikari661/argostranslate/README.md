@@ -1,4 +1,4 @@
-# Ansible Collection - hikari661.argostranslate
+## Ansible Collection - hikari661.argostranslate
 
 This collection contains 1 x very simple module which interfaces with the argos-translate offline translation engine. 
 
